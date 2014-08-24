@@ -1,0 +1,69 @@
+Mileage Variation Application
+========================================================
+author: Kapil Malik
+date: 24 Aug, 2014
+transition:rotate
+
+Introduction
+========================================================
+incremental:true
+
+<small>Mileage Variation Application uses the mtcars dataset to analyze mileage variation with a predictor variable and an additional filter based on the transmission type (manual, automated, both). The following predictors are available in application -
+* Number of cylinders (_cyl_)
+* Gross horsepower (_hp_)
+* Weight in lb/1000 (_wt_)
+* Number of forward gears (_gear_)
+* Number of carburetors (_carb_)
+
+**About mtcars dataset** : 
+The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).</small>
+
+
+Understanding mtcars dataset
+========================================================
+<small>
+The mtcars dataset has `r nrow(mtcars)` entries with `r ncol(mtcars)` columns. The mileage (mpg) variation summary is as follows -
+```{r, cache=TRUE, echo=FALSE}
+summary(mtcars$mpg)
+```
+<br/><p>
+The application helps user to analyze how the mileage varies, as an effect of predictors like weight, horsepower, gears etc. User can select from 5 such predictors.</p>
+Further, there are `r sum(mtcars$am==0)` cars with automatic transmission, and `r sum(mtcars$am==1)` with manual. The application also allows for seeing the effect on one of these sub-sets [see example](#/SampleAnalysis).
+</small>
+
+Sample Analysis
+========================================================
+id: SampleAnalysis
+<small>
+Mileage variation with number of gears, filtered by automatic transmission -
+```{r, cache=TRUE, echo=FALSE}
+library(ggplot2)
+mtcars_automatic = mtcars[mtcars$am==0,]
+qplot(mtcars_automatic$gear, 
+      mtcars_automatic$mpg,
+      xlab='gears',
+      ylab="mpg",
+      main="Automatic cars")+geom_smooth(method='lm')
+```
+***
+Mileage variation with number of gears, filtered by manual transmission -
+```{r, cache=TRUE, echo=FALSE}
+library(ggplot2)
+mtcars_manual = mtcars[mtcars$am==1,]
+qplot(mtcars_manual$gear, 
+      mtcars_manual$mpg,
+      xlab='gears',
+      ylab="mpg",
+      main="Manual cars")+geom_smooth(method='lm')
+```
+</small>
+
+
+Useful links
+========================================================
+
+You can find more about the application and dataset here -
+
+* Git-hub link : [MileageVariationApp-Git](https://github.com/kapil-malik/MileageVariationApp)
+* Shiny server link : [MileageVariationApp-Shiny](http://kmalik.shinyapps.io/MileageVariationApp/)
+* mtcars dataset : [mtcars](http://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html)
