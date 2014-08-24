@@ -9,29 +9,32 @@ library(shiny)
 shinyUI(pageWithSidebar(
   
   # Application title
-  headerPanel("Mileage variation in mtcars dataset"),
+  headerPanel("Mileage Variation in Cars"),
   
   # Sidebar for providing configuration
   sidebarPanel(
     
-    h1("Configuration"),
+    HTML("<em><strong>Mileage variation for cars in mtcars dataset<br/>
+         For a selected predictor variable and a filter on transmission type.</strong></em>"),  
+    
+    HTML("<br/><br/>"),
+    h4("Select predictor for mileage"),
     
     #Select predictor from cyl, hp, wt, gear, carb
-    h3("Select predictor for mileage"),
-    
     selectInput(inputId="predictor",
-                label="Predictor field",
+                label="",
                 choices=c("Number of cylinders"="cyl",
                           "Gross Horsepower"="hp",
                           "Weight in lb/1000"="wt",
                           "Number of forward Gears"="gear",
                           "Number of Carburetors"="carb")),
     
-    #Filter dataset by am=0,1 or both
-    h3("Filter by transmission type"),
+    HTML("<br/>"),
+    h4("Filter data by transmission type"),
     
+    #Filter dataset by am=0,1 or both
     radioButtons(inputId="amFilter",
-                 label="Transmission type",
+                 label="",
                  choices=c("Both"=2,"Automatic"=0,"Manual"=1)),
     
     submitButton(text="Submit")
